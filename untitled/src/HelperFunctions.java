@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 // Static Helper functions
 public class HelperFunctions {
     // Maps feature value to binary i.e "Yes": 1, "No": 0 ...
@@ -88,7 +89,7 @@ public class HelperFunctions {
     }
 
 
-    public static ArrayList<ArrayList<Integer>> stringToBinaryMap(ArrayList<ArrayList<String>> stringData, int features) {
+    public static ArrayList<ArrayList<Integer>> stringToBinaryData(ArrayList<ArrayList<String>> stringData, int features) {
         ArrayList<ArrayList<Integer>> convertedArray = new ArrayList<>(); // New Binary Array List of Data points
 
         // Converts Features and labels to binary and adds it to convertedArray
@@ -115,5 +116,30 @@ public class HelperFunctions {
         }
 
         return convertedArray;
+    }
+
+    // Converts a csv line to an array of string
+    public static ArrayList<String> getArrayCSVLine(String line) {
+
+        ArrayList<Integer> commaIdx = new ArrayList<>(); // holds index of comma's
+        ArrayList<String> featureValues = new ArrayList<>(); // holds string feature values
+        commaIdx.add(-1);
+
+        // Getting the index of each comma in the string
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == ',') {
+                commaIdx.add(i);
+            }
+        }
+        commaIdx.add(line.length());
+
+        // using the comma index to get each word of the line.
+        for (int i = 0; i < commaIdx.size() - 1; i++) {
+
+            String feature = line.substring(commaIdx.get(i) + 1, commaIdx.get(i + 1)); // getting subsequence of line based on comma before and after word.
+            featureValues.add(feature); // adding word to array of words
+        }
+
+        return featureValues;
     }
 }

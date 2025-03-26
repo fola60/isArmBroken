@@ -71,9 +71,9 @@ public class BayesClassifier {
 
     }
 
-    // Predicts whether arm is broken or not returning true or false
-    public boolean predict() {
+    // Predicts whether arm is broken or not returning an array with its first value being 1 for true and 0 for false and its second value being the accuracy
+    public ArrayList<Integer> predict() {
 
-        return true;
+        return new ArrayList<>();
     }
 }
