@@ -9,12 +9,12 @@ public class BayesClassifier {
     private ArrayList<ArrayList<Integer>> Y_Test;
     private int features;
 
-    public HashMap<String, ArrayList<Integer>> probabilityDistro;
+    public HashMap<Integer, ArrayList<Integer>> probabilityMap; // Maps integer converted features to a count of yes an no e.g.: [1,2] = 1 yes and 2 no
 
 
 
     public BayesClassifier(ArrayList<ArrayList<Integer>> X) {
-        probabilityDistro = new HashMap<>();
+        probabilityMap = new HashMap<>();
     }
 
     // Getters and Setters
@@ -71,8 +71,9 @@ public class BayesClassifier {
 
     }
 
-    public String predict() {
+    // Predicts whether arm is broken or not returning true or false
+    public boolean predict() {
 
-        return "";
+        return true;
     }
 }
