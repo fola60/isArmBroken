@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class HelperFunctions {
     // Maps feature value to binary i.e "Yes": 1, "No": 0 ...
     public static HashMap<String, Integer> stringToBinary = new HashMap<>();
-    private static final double trainSplitSize = 0.8; // Setting the size of training data to 80%
-    private static final double testSplitSize = 0.2; // Setting the size of testing data to 20%
+    private static final double trainSplitSize = 0.6; // Setting the size of training data to 60%
+    private static final double testSplitSize = 0.4; // Setting the size of testing data to 40%
 
     // Populating values of stringToBinary HashMap
     static {
@@ -15,14 +15,14 @@ public class HelperFunctions {
         stringToBinary.put("HighImpact", 1);
         stringToBinary.put("Extended", 1);
         stringToBinary.put("Hard", 1);
-        stringToBinary.put("Yes", 1);
+        stringToBinary.put("No", 1);
         stringToBinary.put("yes", 1);
 
         // Mappings to 0
         stringToBinary.put("LowImpact", 0);
         stringToBinary.put("Bent", 0);
         stringToBinary.put("Soft", 0);
-        stringToBinary.put("No", 0);
+        stringToBinary.put("Yes", 0);
         stringToBinary.put("no", 0);
     }
 
