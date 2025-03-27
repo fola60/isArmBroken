@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class HelperFunctions {
     // Maps feature value to binary i.e "Yes": 1, "No": 0 ...
     public static HashMap<String, Integer> stringToBinary = new HashMap<>();
-    private static final double trainSplitSize = 0.6; // Setting the size of training data to 60%
-    private static final double testSplitSize = 0.4; // Setting the size of testing data to 40%
+    private static final double trainSplitSize = 0.75; // Setting the size of training data to 60%
+    private static final double testSplitSize = 0.25; // Setting the size of testing data to 40%
 
     // Populating values of stringToBinary HashMap
     static {
@@ -44,7 +44,7 @@ public class HelperFunctions {
 
     // Splits data into training data Y
     public static ArrayList<Integer> trainSplitY(ArrayList<ArrayList<Integer>> D) {
-        // Defining length of training split at 80%
+        // Length of train split
         int trainLength = (int) (D.size() * trainSplitSize);
 
         // Defining 2d array of training data split [1, 0, 1,...] etc.
@@ -60,14 +60,15 @@ public class HelperFunctions {
 
     // Splits data into testing data X
     public static ArrayList<Integer> testSplitX(ArrayList<ArrayList<Integer>> D) {
-        // Defining length of testing split at 20%
+        // Defining length of testing split and training split
         int testLength = (int) (D.size() * testSplitSize);
+        int trainLength = (int) (D.size() * trainSplitSize);
 
         // Defining 2d array of testing data split [1010, 1001, ...] etc.
         ArrayList<Integer> testSplitX = new ArrayList<>();
 
         // Populating Training array with 80% of data
-        for(int i = 0; i < testLength; i++) {
+        for(int i = trainLength; i < testLength + trainLength; i++) {
             testSplitX.add(D.get(i).get(0));
         }
 
@@ -76,14 +77,15 @@ public class HelperFunctions {
 
     // Splits data into testing data Y
     public static ArrayList<Integer> testSplitY(ArrayList<ArrayList<Integer>> D) {
-        // Defining length of testing split at 20%
+        // Defining length of testing split and training split
         int testLength = (int) (D.size() * testSplitSize);
+        int trainLength = (int) (D.size() * trainSplitSize);
 
         // Defining 2d array of testing data split [1, 0, 0, 1 ...] etc.
         ArrayList<Integer> testSplitY = new ArrayList<>();
 
         // Populating Training array with 80% of data
-        for(int i = 0; i < testLength; i++) {
+        for(int i = trainLength; i < testLength + trainLength; i++) {
             testSplitY.add(D.get(i).get(1));
         }
 
