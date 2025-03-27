@@ -2,59 +2,65 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BayesClassifier {
-    private ArrayList<ArrayList<Integer>> X;
-    private ArrayList<ArrayList<Integer>> X_Train;
-    private ArrayList<ArrayList<Integer>> Y_Train;
-    private ArrayList<ArrayList<Integer>> X_Test;
-    private ArrayList<ArrayList<Integer>> Y_Test;
+    private ArrayList<ArrayList<Integer>> D;
+    private ArrayList<Integer> X_Train;
+    private ArrayList<Integer> Y_Train;
+    private ArrayList<Integer> X_Test;
+    private ArrayList<Integer> Y_Test;
     private int features;
-
-    public HashMap<Integer, ArrayList<Integer>> probabilityMap; // Maps integer converted features to a count of yes an no e.g.: [1,2] = 1 yes and 2 no
-
+    private HashMap<Integer, ArrayList<Integer>> probabilityMap; // Maps integer converted features to a count of yes an no e.g.: [1,2] = 1 yes and 2 no
 
 
-    public BayesClassifier(ArrayList<ArrayList<Integer>> X) {
+
+    public BayesClassifier(ArrayList<ArrayList<Integer>> D, int features) {
+        setD(D); // Setting Data
+        setX_Train(HelperFunctions.trainSplitX(getD()));
+        setY_Train(HelperFunctions.trainSplitY(getD()));
+        setX_Test(HelperFunctions.testSplitX(getD()));
+        setY_Test(HelperFunctions.testSplitY(getD()));
+        setFeatures(features);
         probabilityMap = new HashMap<>();
+
     }
 
     // Getters and Setters
-    public void setX(ArrayList<ArrayList<Integer>> x) {
-        X = x;
+    public void setD(ArrayList<ArrayList<Integer>> d) {
+        D = d;
     }
 
-    public ArrayList<ArrayList<Integer>> getX() {
-        return X;
+    public ArrayList<ArrayList<Integer>> getD() {
+        return D;
     }
 
-    public void setX_Train(ArrayList<ArrayList<Integer>> x_Train) {
+    public void setX_Train(ArrayList<Integer> x_Train) {
         X_Train = x_Train;
     }
 
-    public ArrayList<ArrayList<Integer>> getX_Train() {
+    public ArrayList<Integer> getX_Train() {
         return X_Train;
     }
 
-    public void setY_Train(ArrayList<ArrayList<Integer>> y_Train) {
+    public void setY_Train(ArrayList<Integer> y_Train) {
         Y_Train = y_Train;
     }
 
-    public ArrayList<ArrayList<Integer>> getY_Train() {
+    public ArrayList<Integer> getY_Train() {
         return Y_Train;
     }
 
-    public void setX_Test(ArrayList<ArrayList<Integer>> x_Test) {
+    public void setX_Test(ArrayList<Integer> x_Test) {
         X_Test = x_Test;
     }
 
-    public ArrayList<ArrayList<Integer>> getX_Test() {
+    public ArrayList<Integer> getX_Test() {
         return X_Test;
     }
 
-    public void setY_Test(ArrayList<ArrayList<Integer>> y_Test) {
+    public void setY_Test(ArrayList<Integer> y_Test) {
         Y_Test = y_Test;
     }
 
-    public ArrayList<ArrayList<Integer>> getY_Test() {
+    public ArrayList<Integer> getY_Test() {
         return Y_Test;
     }
 
@@ -63,11 +69,37 @@ public class BayesClassifier {
     }
 
     public void setFeatures(int features) {
-        this.features = features;
+        if (features > 0)
+            this.features = features;
     }
 
     // Trains model on training Data
     public void fit() {
+
+        for (int i = 0; i < getX_Train().size(); i++) {
+            // Getting the binary digits from X data
+            int key = getX_Train().get(i);
+
+            if (probabilityMap.containsKey(key) ) {
+                // Extracting current "yes" and "no" count from probability map
+                ArrayList<Integer> oldLabel = new ArrayList<>();
+                oldLabel = probabilityMap.get(key);
+
+                ArrayList<Integer> newLabel = new ArrayList<>();
+
+                // Updating "yes" and "no" count in probability map
+                if (Y_Train.get(i) == 1) {
+                    newLabel.add(oldLabel.get(0) + 1); // Since Y value is 1 meaning "yes" we add 1 to the "yes" count and add it to new tuple
+                    newLabel.add(oldLabel.get(1)); // Copy old "no" count back
+                } else if (Y_Train.get(i) == 0){
+                    newLabel.add(oldLabel.get(0)); // Copy old "yes" count back
+                    newLabel.add(oldLabel.get(1) + 1); // Since Y value is 0 meaning "yes" we add 1 to the "yes" count and add it to new tuple
+                }
+
+            } else {
+
+            }
+        }
 
     }
 

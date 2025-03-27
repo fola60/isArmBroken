@@ -6,6 +6,8 @@ import java.util.HashMap;
 public class HelperFunctions {
     // Maps feature value to binary i.e "Yes": 1, "No": 0 ...
     public static HashMap<String, Integer> stringToBinary = new HashMap<>();
+    private static final double trainSplitSize = 0.8; // Setting the size of training data to 80%
+    private static final double testSplitSize = 0.2; // Setting the size of testing data to 20%
 
     // Populating values of stringToBinary HashMap
     static {
@@ -27,7 +29,7 @@ public class HelperFunctions {
     // Splits data into training data X
     public static ArrayList<Integer> trainSplitX(ArrayList<ArrayList<Integer>> D) {
         // Defining length of training split at 80%
-        int trainLength = (int) (D.size() * 0.8);
+        int trainLength = (int) (D.size() * trainSplitSize);
 
         // Defining 2d array of training data split [1010, 1001, ...] etc.
         ArrayList<Integer> trainSplitX = new ArrayList<>();
@@ -43,14 +45,14 @@ public class HelperFunctions {
     // Splits data into training data Y
     public static ArrayList<Integer> trainSplitY(ArrayList<ArrayList<Integer>> D) {
         // Defining length of training split at 80%
-        int trainLength = (int) (D.size() * 0.8);
+        int trainLength = (int) (D.size() * trainSplitSize);
 
         // Defining 2d array of training data split [1, 0, 1,...] etc.
         ArrayList<Integer> trainSplitY = new ArrayList<>();
 
         // Populating Training array with 80% of data
         for(int i = 0; i < trainLength; i++) {
-            trainSplitY.add(D.get(i).get(0));
+            trainSplitY.add(D.get(i).get(1));
         }
 
         return trainSplitY;
@@ -59,7 +61,7 @@ public class HelperFunctions {
     // Splits data into testing data X
     public static ArrayList<Integer> testSplitX(ArrayList<ArrayList<Integer>> D) {
         // Defining length of testing split at 20%
-        int testLength = (int) (D.size() * 0.2);
+        int testLength = (int) (D.size() * testSplitSize);
 
         // Defining 2d array of testing data split [1010, 1001, ...] etc.
         ArrayList<Integer> testSplitX = new ArrayList<>();
@@ -75,14 +77,14 @@ public class HelperFunctions {
     // Splits data into testing data Y
     public static ArrayList<Integer> testSplitY(ArrayList<ArrayList<Integer>> D) {
         // Defining length of testing split at 20%
-        int testLength = (int) (D.size() * 0.2);
+        int testLength = (int) (D.size() * testSplitSize);
 
         // Defining 2d array of testing data split [1, 0, 0, 1 ...] etc.
         ArrayList<Integer> testSplitY = new ArrayList<>();
 
         // Populating Training array with 80% of data
         for(int i = 0; i < testLength; i++) {
-            testSplitY.add(D.get(i).get(0));
+            testSplitY.add(D.get(i).get(1));
         }
 
         return testSplitY;
@@ -110,7 +112,7 @@ public class HelperFunctions {
 
             ArrayList<Integer> X_y = new ArrayList<>(); // 2d array with the first value being binary features and 2nd value being binary label.
             X_y.add(key); // adds the binary representation of the string features to array
-            X_y.add(HelperFunctions.stringToBinary.get(list.get(features + 1))); // gets the binary mapping of yes or no and adds it to the array
+            X_y.add(HelperFunctions.stringToBinary.get(list.get(features))); // gets the binary mapping of yes or no and adds it to the array
 
             convertedArray.add(X_y); // Adding transformed data point to new array
         }
