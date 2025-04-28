@@ -92,12 +92,13 @@ public class HelperFunctions {
         return testSplitY;
     }
 
-
+    // Converts string features into binary
     public static ArrayList<ArrayList<Integer>> stringToBinaryData(ArrayList<ArrayList<String>> stringData, int features) {
         ArrayList<ArrayList<Integer>> convertedArray = new ArrayList<>(); // New Binary Array List of Data points
 
         // Converts Features and labels to binary and adds it to convertedArray
         for (ArrayList<String> list: stringData) {
+
             int key = 0;
             int factor = 1;
 
@@ -145,5 +146,42 @@ public class HelperFunctions {
         }
 
         return featureValues;
+    }
+
+    // maps the binary features to string
+    public static String binaryToString(int binaryFeature) {
+        String s = "";
+        if (binaryFeature % 10 == 1) {
+            s += "HighImpact ";
+        } else {
+            s += "LowImpact ";
+        }
+
+        binaryFeature /= 10;
+
+        if (binaryFeature % 10 == 1) {
+            s += "Extended ";
+        } else {
+            s += "Bent ";
+        }
+
+        binaryFeature /= 10;
+
+        if (binaryFeature % 10 == 1) {
+            s += "Hard ";
+        } else {
+            s += "Soft ";
+        }
+
+        binaryFeature /= 10;
+
+        if (binaryFeature % 10 == 1) {
+            s += "No ";
+        } else {
+            s += "Yes ";
+        }
+
+
+        return s;
     }
 }

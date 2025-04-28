@@ -124,7 +124,7 @@ public class BayesClassifier {
         int accuratePredictions = 0; // number of accurate predictions
 
         for(int i = 0; i < X_Test.size(); i++) {
-            ArrayList<Integer> prediction = predict(X_Test.get(0));
+            ArrayList<Integer> prediction = predict(X_Test.get(i));
             if (Y_Test.get(i) == prediction.get(0)) {
                 accuratePredictions += 1;
             }

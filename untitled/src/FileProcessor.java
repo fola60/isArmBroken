@@ -74,7 +74,7 @@ public class FileProcessor {
         return length;
     }
 
-    // Returns a file writer with the inputed file
+    // Returns a file writer with the inputted file
     private static FileWriter getFileWriter(File file) {
         FileWriter fileWriter;
         try {
