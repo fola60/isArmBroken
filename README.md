@@ -47,10 +47,10 @@ Features
   - Integer fileLength: is the amount of lines in the file
 
 Functions
-  -	FileProcessor(): Handles file setup.
-	- getFileString(): reads all lines from a file and returns an ArrayList<ArrayList<String>>, where each inner list contains the parsed CSV values of a line.
-	- writeLine(String line): appends a given string to the file.
-  - getFileLength() : returns integer line length of file
+ - FileProcessor(): Handles file setup.
+ - getFileString(): reads all lines from a file and returns an ArrayList<ArrayList<String>>, where each inner list contains the parsed CSV values of a line.
+ - writeLine(String line): appends a given string to the file.
+ - getFileLength() : returns integer line length of file
 	
 
 
@@ -96,3 +96,6 @@ Functions
  The GUI class creates a graphical user interface using the J ui library that allows a user to select the feature options (impact type, arm position, surface type, and protective gear use) using dropdown menus. When the user clicks the “Predict” button, the class encodes the selected options into a numeric key and uses a trained BayesClassifier model to predict whether the user’s arm is predicted to be broken or not, displaying the result and probability.
  
 
+
+### If I had more time?
+If i had more time I would, calcukate the weights of the dataset to see which features had the most impact on the labels, I would also improve the GUI class to make it look better and I would adapt the code to allow it to learn from any dataset.
